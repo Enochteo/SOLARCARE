@@ -1,0 +1,68 @@
+#include <DHT_U.h>
+
+DHT dht(DHTPIN, DHTTYPE);
+#include <Servo.h>
+
+
+float LDR1, LDR2, temp1, humidity;
+
+Servo myservo;           // Create servo object
+int ldrLeft = A4;        // Left LDR connected to analog pin A0
+int ldrRight = A5;       // Right LDR connected to analog pin A1
+int servoPin = 5;        // Servo connected to digital pin 9
+int dhtPin = A2; 
+
+int threshold = 10;      // Threshold for light difference
+int pos = 90;            // Initial servo position (center)
+
+void setup() {
+  // Attach the servo
+  myservo.write(pos);       // Set servo to initial position
+  Serial.begin(9600);
+  myservo.attach(servoPin);
+  pinMode(A2, INPUT);
+  pinMode(A4, INPUT);
+  pinMode(A5, INPUT);
+  pinMode (4, OUTPUT)
+  delay(500);
+  Serial.println("Left LDR | Right LDR | Servo Position | Temperature | Humidity");
+}
+
+void loop() {
+
+  float humidity = analogRead(dhtPin);
+ 
+  float Temperature = analogRead(dhtPin);
+  
+
+  int leftValue = analogRead(ldrLeft);   // Read light level from left LDR
+  int rightValue = analogRead(ldrRight); // Read light level from right LDR
+  
+  int difference = leftValue - rightValue; // Calculate light difference
+  
+  if (abs(difference) > threshold) {
+    // Adjust servo based on which side has more light
+    if (difference > 0 && pos > 0) {         // More light on left LDR
+      pos -= 5;                              // Move servo to the left
+    } else if (difference < 0 && pos < 180) {// More light on right LDR
+      pos += 5;                              // Move servo to the right
+    }
+    myservo.write(pos);                      // Update servo position
+  }
+
+  // Print values for debugging
+
+   Serial.print(leftValue);
+  Serial.print("        | ");
+  Serial.print(rightValue);
+  Serial.print("         | ");
+  Serial.println(pos);
+  Serial.print("         | ");
+
+   Serial.print((0.873648*Temperature) - 94.815);
+  Serial.print("        | ");
+
+
+  delay(700);  // Small delay for stability
+}
+  
