@@ -1,10 +1,9 @@
 # SOLARCARE
 SOLAR TRACKER/MONITORING STATION
 
-This is an hardware hack leveraging Arduino technologies to improve the efficiency of solar panels by aligning them with the motion of sunlight and monitoring the panels to keep them under a cool temperature and safe.
+This is a hardware hack that leverages Arduino technology to improve the efficiency of solar panels. It aligns the panels with the motion of sunlight and monitors them to keep them at a cool and safe temperature.
 
-Description
-The device makes use of two Light Detecting resistors which are used to determine the relative difference in light intensity on opposite sides of a panel, it also makes use of a servo motor which rotates according to that difference in light intensity, a DHT11 sensor that measures both temperature and relative humidity on the surface of the panel to maintain them and notify the user of extreme weather conditions and an arduino.
+Description: The device uses two Light-Detecting resistors to determine the relative difference in light intensity on opposite sides of a panel. It also uses a servo motor that rotates according to that difference in light intensity, a DHT11 sensor that measures both temperature and relative humidity on the panel's surface to maintain them and notify the user of extreme weather conditions, and an Arduino.
 
 # Components:
 - Arduino Uno
